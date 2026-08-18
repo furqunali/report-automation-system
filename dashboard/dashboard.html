@@ -41,6 +41,14 @@
              display:block}
   .bar-fill{display:block;height:100%;min-width:2px;border-radius:6px;
             background:linear-gradient(90deg,var(--teal),var(--teal-2))}
+  .grid3{display:grid;grid-template-columns:1.1fr 1.1fr .9fr;gap:18px;margin-bottom:18px}
+  @media(max-width:900px){.grid3{grid-template-columns:1fr}}
+  .donut-wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
+  .legend{display:flex;flex-direction:column;gap:7px;font-size:12.5px}
+  .legend .li{display:flex;align-items:center;gap:8px;color:var(--ink)}
+  .legend .sw{width:12px;height:12px;border-radius:3px;flex:none}
+  .legend .pct{margin-left:auto;color:var(--muted);font-variant-numeric:tabular-nums;
+               padding-left:14px}
   .bar-row .val{width:92px;text-align:right;font-variant-numeric:tabular-nums;
                 color:var(--ink)}
   table{width:100%;border-collapse:collapse;font-size:13px}
@@ -90,9 +98,10 @@
     <div style="margin-left:auto;color:var(--muted);font-size:12px" id="rowInfo"></div>
   </div>
 
-  <div class="grid2">
+  <div class="grid3">
     <div class="card"><h2>Sales by Category</h2><div id="chartCat"></div></div>
     <div class="card"><h2>Sales by Site</h2><div id="chartSite"></div></div>
+    <div class="card"><h2>Category Share</h2><div id="chartDonut" class="donut-wrap"></div></div>
   </div>
 
   <div class="card">
@@ -115,6 +124,14 @@ const DATA = (window.REPORT_DATA && window.REPORT_DATA.records) || [];
 const money = n => "$" + Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
 const num   = n => Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
 
+// vibrant categorical palette (consistent across bars + donut)
+const PALETTE=["#0EA5A5","#F97316","#6366F1","#EC4899","#22C55E","#EAB308","#3B82F6","#EF4444","#14B8A6","#A855F7"];
+const _catColor={};
+function colorFor(name){
+  if(!(name in _catColor)){ _catColor[name]=PALETTE[Object.keys(_catColor).length % PALETTE.length]; }
+  return _catColor[name];
+}
+
 function uniq(field){return [...new Set(DATA.map(r=>r[field]))].sort();}
 function fill(sel,vals){const s=document.getElementById(sel);
   vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;
@@ -127,15 +144,38 @@ function filtered(){
   return DATA.filter(r=>(!site||r.Site===site)&&(!cat||r.Category===cat));
 }
 
-function barChart(elId,rows){
+function barChart(elId,rows,colored){
   const max=Math.max(...rows.map(r=>r[1]),1);
-  document.getElementById(elId).innerHTML = rows.map(([name,val])=>`
+  document.getElementById(elId).innerHTML = rows.map(([name,val])=>{
+    const bg = colored
+      ? `background:${colorFor(name)}`
+      : "background:linear-gradient(90deg,var(--teal),var(--teal-2))";
+    return `
     <div class="bar-row">
       <span class="name" title="${name}">${name}</span>
       <span class="bar-track"><span class="bar-fill"
-        style="width:${(val/max*100).toFixed(1)}%"></span></span>
+        style="width:${(val/max*100).toFixed(1)}%;${bg}"></span></span>
       <span class="val">${money(val)}</span>
-    </div>`).join("");
+    </div>`;}).join("");
+}
+
+function donut(elId,rows){
+  const total=rows.reduce((s,r)=>s+r[1],0)||1;
+  const R=52,C=2*Math.PI*R; let off=0;
+  const segs=rows.map(([name,val])=>{
+    const frac=val/total, len=frac*C;
+    const s=`<circle r="${R}" cx="70" cy="70" fill="none" stroke="${colorFor(name)}"
+      stroke-width="22" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-off}"
+      transform="rotate(-90 70 70)"></circle>`;
+    off+=len; return s;
+  }).join("");
+  const legend=rows.map(([name,val])=>`
+    <div class="li"><span class="sw" style="background:${colorFor(name)}"></span>
+      <span>${name}</span><span class="pct">${(val/total*100).toFixed(0)}%</span></div>`).join("");
+  document.getElementById(elId).innerHTML=
+    `<svg width="140" height="140" viewBox="0 0 140 140">${segs}
+      <circle r="30" cx="70" cy="70" fill="#fff"></circle></svg>
+     <div class="legend">${legend}</div>`;
 }
 
 function groupSum(rows,key){
@@ -154,8 +194,10 @@ function render(){
   document.getElementById("kpiNoMove").textContent=num(noMove);
   document.getElementById("rowInfo").textContent=rows.length+" records";
 
-  barChart("chartCat",groupSum(rows,"Category"));
-  barChart("chartSite",groupSum(rows,"Site"));
+  const catData=groupSum(rows,"Category");
+  barChart("chartCat",catData,true);
+  barChart("chartSite",groupSum(rows,"Site"),false);
+  donut("chartDonut",catData);
 
   const top=[...rows].sort((a,b)=>Number(b.Sales)-Number(a.Sales)).slice(0,10);
   document.getElementById("topBody").innerHTML=top.map((r,i)=>`
