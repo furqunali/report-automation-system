@@ -1,0 +1,32 @@
+# --- Real company data must NEVER be committed ---
+# Only sanitized demo files (tracked explicitly below) are allowed.
+01_input_reports/*
+!01_input_reports/.gitkeep
+!01_input_reports/*DEMO*.csv
+
+02_Processed/
+03_output/*
+!03_output/.gitkeep
+
+04_Logs/
+*.log
+processing_log_*.txt
+
+# Real Excel workbooks (safety net — never commit raw reports)
+*.xlsx
+*.xlsm
+*.xls
+!sample_data/*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

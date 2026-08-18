@@ -1,0 +1,217 @@
+Site,Category,Product,Quantity,Sales,Status
+Demo Store 01,Beverages,Cola 20oz,46,806.38,Active
+Demo Store 01,Beverages,Energy Drink,103,949.66,Active
+Demo Store 01,Beverages,Bottled Water,188,2838.8,Active
+Demo Store 01,Beverages,Iced Coffee,61,822.89,Active
+Demo Store 01,Snacks,Potato Chips,10,144.5,Active
+Demo Store 01,Snacks,Chocolate Bar,131,757.18,Active
+Demo Store 01,Snacks,Trail Mix,232,1800.32,Active
+Demo Store 01,Snacks,Beef Jerky,217,4303.11,Active
+Demo Store 01,Tobacco,Cigarettes Pack,196,1297.52,Active
+Demo Store 01,Tobacco,Cigar Single,157,2084.96,Active
+Demo Store 01,Tobacco,Vape Pod,0,0.0,No Movement
+Demo Store 01,Grocery,Bread Loaf,0,0.0,No Movement
+Demo Store 01,Grocery,Canned Soup,0,0.0,No Movement
+Demo Store 01,Grocery,Pasta 1lb,75,573.0,Active
+Demo Store 01,Grocery,Cooking Oil,96,1734.72,Active
+Demo Store 01,Frozen,Ice Cream Tub,17,177.99,Active
+Demo Store 01,Frozen,Frozen Pizza,190,3425.7,Active
+Demo Store 01,Frozen,Frozen Burrito,55,993.3,Active
+Demo Store 01,Dairy,Milk Gallon,236,877.92,Active
+Demo Store 01,Dairy,Cheese Block,237,578.28,Active
+Demo Store 01,Dairy,Yogurt Cup,42,200.76,Active
+Demo Store 01,Automotive,Motor Oil 1qt,131,1632.26,Active
+Demo Store 01,Automotive,Windshield Fluid,24,112.8,Active
+Demo Store 01,Automotive,Air Freshener,57,405.27,Active
+Demo Store 01,Health & Beauty,Pain Reliever,150,1126.5,Active
+Demo Store 01,Health & Beauty,Hand Sanitizer,63,481.32,Active
+Demo Store 01,Health & Beauty,Lip Balm,36,212.4,Active
+Demo Store 02,Beverages,Cola 20oz,197,1985.76,Active
+Demo Store 02,Beverages,Energy Drink,50,295.5,Active
+Demo Store 02,Beverages,Bottled Water,139,2201.76,Active
+Demo Store 02,Beverages,Iced Coffee,96,849.6,Active
+Demo Store 02,Snacks,Potato Chips,129,2052.39,Active
+Demo Store 02,Snacks,Chocolate Bar,206,2200.08,Active
+Demo Store 02,Snacks,Trail Mix,103,1088.71,Active
+Demo Store 02,Snacks,Beef Jerky,28,387.8,Active
+Demo Store 02,Tobacco,Cigarettes Pack,0,0.0,No Movement
+Demo Store 02,Tobacco,Cigar Single,168,2056.32,Active
+Demo Store 02,Tobacco,Vape Pod,129,279.93,Active
+Demo Store 02,Grocery,Bread Loaf,56,830.48,Active
+Demo Store 02,Grocery,Canned Soup,201,2552.7,Active
+Demo Store 02,Grocery,Pasta 1lb,214,1114.94,Active
+Demo Store 02,Grocery,Cooking Oil,223,1763.93,Active
+Demo Store 02,Frozen,Ice Cream Tub,244,907.68,Active
+Demo Store 02,Frozen,Frozen Pizza,85,203.15,Active
+Demo Store 02,Frozen,Frozen Burrito,162,1205.28,Active
+Demo Store 02,Dairy,Milk Gallon,0,0.0,No Movement
+Demo Store 02,Dairy,Cheese Block,208,4031.04,Active
+Demo Store 02,Dairy,Yogurt Cup,161,473.34,Active
+Demo Store 02,Automotive,Motor Oil 1qt,206,1907.56,Active
+Demo Store 02,Automotive,Windshield Fluid,151,2278.59,Active
+Demo Store 02,Automotive,Air Freshener,124,1080.04,Active
+Demo Store 02,Health & Beauty,Pain Reliever,205,1728.15,Active
+Demo Store 02,Health & Beauty,Hand Sanitizer,234,4607.46,Active
+Demo Store 02,Health & Beauty,Lip Balm,179,2944.55,Active
+Demo Store 03,Beverages,Cola 20oz,56,515.76,Active
+Demo Store 03,Beverages,Energy Drink,185,795.5,Active
+Demo Store 03,Beverages,Bottled Water,182,1969.24,Active
+Demo Store 03,Beverages,Iced Coffee,111,1956.93,Active
+Demo Store 03,Snacks,Potato Chips,212,1596.36,Active
+Demo Store 03,Snacks,Chocolate Bar,165,473.55,Active
+Demo Store 03,Snacks,Trail Mix,162,2724.84,Active
+Demo Store 03,Snacks,Beef Jerky,235,3870.45,Active
+Demo Store 03,Tobacco,Cigarettes Pack,158,2869.28,Active
+Demo Store 03,Tobacco,Cigar Single,127,2171.7,Active
+Demo Store 03,Tobacco,Vape Pod,0,0.0,No Movement
+Demo Store 03,Grocery,Bread Loaf,119,1856.4,Active
+Demo Store 03,Grocery,Canned Soup,28,173.6,Active
+Demo Store 03,Grocery,Pasta 1lb,109,1136.87,Active
+Demo Store 03,Grocery,Cooking Oil,170,2439.5,Active
+Demo Store 03,Frozen,Ice Cream Tub,0,0.0,No Movement
+Demo Store 03,Frozen,Frozen Pizza,248,1125.92,Active
+Demo Store 03,Frozen,Frozen Burrito,57,1033.41,Active
+Demo Store 03,Dairy,Milk Gallon,86,973.52,Active
+Demo Store 03,Dairy,Cheese Block,31,368.9,Active
+Demo Store 03,Dairy,Yogurt Cup,212,913.72,Active
+Demo Store 03,Automotive,Motor Oil 1qt,117,456.3,Active
+Demo Store 03,Automotive,Windshield Fluid,178,3180.86,Active
+Demo Store 03,Automotive,Air Freshener,235,2335.9,Active
+Demo Store 03,Health & Beauty,Pain Reliever,128,528.64,Active
+Demo Store 03,Health & Beauty,Hand Sanitizer,49,888.37,Active
+Demo Store 03,Health & Beauty,Lip Balm,110,1180.3,Active
+Demo Store 04,Beverages,Cola 20oz,55,679.8,Active
+Demo Store 04,Beverages,Energy Drink,108,365.04,Active
+Demo Store 04,Beverages,Bottled Water,205,774.9,Active
+Demo Store 04,Beverages,Iced Coffee,154,1977.36,Active
+Demo Store 04,Snacks,Potato Chips,19,117.8,Active
+Demo Store 04,Snacks,Chocolate Bar,216,3620.16,Active
+Demo Store 04,Snacks,Trail Mix,121,1080.53,Active
+Demo Store 04,Snacks,Beef Jerky,86,953.74,Active
+Demo Store 04,Tobacco,Cigarettes Pack,157,1673.62,Active
+Demo Store 04,Tobacco,Cigar Single,194,3654.96,Active
+Demo Store 04,Tobacco,Vape Pod,99,964.26,Active
+Demo Store 04,Grocery,Bread Loaf,162,1874.34,Active
+Demo Store 04,Grocery,Canned Soup,0,0.0,No Movement
+Demo Store 04,Grocery,Pasta 1lb,128,2266.88,Active
+Demo Store 04,Grocery,Cooking Oil,145,2884.05,Active
+Demo Store 04,Frozen,Ice Cream Tub,174,629.88,Active
+Demo Store 04,Frozen,Frozen Pizza,23,406.41,Active
+Demo Store 04,Frozen,Frozen Burrito,0,0.0,No Movement
+Demo Store 04,Dairy,Milk Gallon,157,2829.14,Active
+Demo Store 04,Dairy,Cheese Block,234,2204.28,Active
+Demo Store 04,Dairy,Yogurt Cup,163,2997.57,Active
+Demo Store 04,Automotive,Motor Oil 1qt,0,0.0,No Movement
+Demo Store 04,Automotive,Windshield Fluid,89,1641.16,Active
+Demo Store 04,Automotive,Air Freshener,54,189.54,Active
+Demo Store 04,Health & Beauty,Pain Reliever,207,1931.31,Active
+Demo Store 04,Health & Beauty,Hand Sanitizer,52,970.32,Active
+Demo Store 04,Health & Beauty,Lip Balm,133,1187.69,Active
+Demo Store 05,Beverages,Cola 20oz,0,0.0,No Movement
+Demo Store 05,Beverages,Energy Drink,75,1056.75,Active
+Demo Store 05,Beverages,Bottled Water,32,601.6,Active
+Demo Store 05,Beverages,Iced Coffee,145,2546.2,Active
+Demo Store 05,Snacks,Potato Chips,30,188.4,Active
+Demo Store 05,Snacks,Chocolate Bar,183,2186.85,Active
+Demo Store 05,Snacks,Trail Mix,220,2351.8,Active
+Demo Store 05,Snacks,Beef Jerky,77,1177.33,Active
+Demo Store 05,Tobacco,Cigarettes Pack,40,562.8,Active
+Demo Store 05,Tobacco,Cigar Single,113,346.91,Active
+Demo Store 05,Tobacco,Vape Pod,134,2271.3,Active
+Demo Store 05,Grocery,Bread Loaf,0,0.0,No Movement
+Demo Store 05,Grocery,Canned Soup,70,739.2,Active
+Demo Store 05,Grocery,Pasta 1lb,143,1042.47,Active
+Demo Store 05,Grocery,Cooking Oil,84,805.56,Active
+Demo Store 05,Frozen,Ice Cream Tub,117,904.41,Active
+Demo Store 05,Frozen,Frozen Pizza,18,144.0,Active
+Demo Store 05,Frozen,Frozen Burrito,235,3940.95,Active
+Demo Store 05,Dairy,Milk Gallon,176,2235.2,Active
+Demo Store 05,Dairy,Cheese Block,161,1114.12,Active
+Demo Store 05,Dairy,Yogurt Cup,126,2485.98,Active
+Demo Store 05,Automotive,Motor Oil 1qt,55,526.9,Active
+Demo Store 05,Automotive,Windshield Fluid,220,2697.2,Active
+Demo Store 05,Automotive,Air Freshener,141,2212.29,Active
+Demo Store 05,Health & Beauty,Pain Reliever,42,689.22,Active
+Demo Store 05,Health & Beauty,Hand Sanitizer,67,727.62,Active
+Demo Store 05,Health & Beauty,Lip Balm,120,648.0,Active
+Demo Store 06,Beverages,Cola 20oz,153,1975.23,Active
+Demo Store 06,Beverages,Energy Drink,22,169.4,Active
+Demo Store 06,Beverages,Bottled Water,175,1841.0,Active
+Demo Store 06,Beverages,Iced Coffee,132,714.12,Active
+Demo Store 06,Snacks,Potato Chips,133,1048.04,Active
+Demo Store 06,Snacks,Chocolate Bar,114,530.1,Active
+Demo Store 06,Snacks,Trail Mix,139,856.24,Active
+Demo Store 06,Snacks,Beef Jerky,240,1773.6,Active
+Demo Store 06,Tobacco,Cigarettes Pack,159,2803.17,Active
+Demo Store 06,Tobacco,Cigar Single,236,2149.96,Active
+Demo Store 06,Tobacco,Vape Pod,245,3297.7,Active
+Demo Store 06,Grocery,Bread Loaf,204,848.64,Active
+Demo Store 06,Grocery,Canned Soup,93,1778.16,Active
+Demo Store 06,Grocery,Pasta 1lb,186,3143.4,Active
+Demo Store 06,Grocery,Cooking Oil,163,1763.66,Active
+Demo Store 06,Frozen,Ice Cream Tub,0,0.0,No Movement
+Demo Store 06,Frozen,Frozen Pizza,137,2097.47,Active
+Demo Store 06,Frozen,Frozen Burrito,86,876.34,Active
+Demo Store 06,Dairy,Milk Gallon,79,752.08,Active
+Demo Store 06,Dairy,Cheese Block,148,689.68,Active
+Demo Store 06,Dairy,Yogurt Cup,101,1878.6,Active
+Demo Store 06,Automotive,Motor Oil 1qt,226,2483.74,Active
+Demo Store 06,Automotive,Windshield Fluid,187,2670.36,Active
+Demo Store 06,Automotive,Air Freshener,224,3872.96,Active
+Demo Store 06,Health & Beauty,Pain Reliever,65,896.35,Active
+Demo Store 06,Health & Beauty,Hand Sanitizer,14,144.48,Active
+Demo Store 06,Health & Beauty,Lip Balm,87,1069.23,Active
+Demo Store 07,Beverages,Cola 20oz,140,1261.4,Active
+Demo Store 07,Beverages,Energy Drink,77,917.84,Active
+Demo Store 07,Beverages,Bottled Water,42,367.92,Active
+Demo Store 07,Beverages,Iced Coffee,83,1617.67,Active
+Demo Store 07,Snacks,Potato Chips,216,2209.68,Active
+Demo Store 07,Snacks,Chocolate Bar,249,1279.86,Active
+Demo Store 07,Snacks,Trail Mix,214,2270.54,Active
+Demo Store 07,Snacks,Beef Jerky,223,3235.73,Active
+Demo Store 07,Tobacco,Cigarettes Pack,210,2604.0,Active
+Demo Store 07,Tobacco,Cigar Single,115,2275.85,Active
+Demo Store 07,Tobacco,Vape Pod,208,2936.96,Active
+Demo Store 07,Grocery,Bread Loaf,123,1061.49,Active
+Demo Store 07,Grocery,Canned Soup,240,513.6,Active
+Demo Store 07,Grocery,Pasta 1lb,0,0.0,No Movement
+Demo Store 07,Grocery,Cooking Oil,14,259.0,Active
+Demo Store 07,Frozen,Ice Cream Tub,215,1120.15,Active
+Demo Store 07,Frozen,Frozen Pizza,220,1889.8,Active
+Demo Store 07,Frozen,Frozen Burrito,141,2074.11,Active
+Demo Store 07,Dairy,Milk Gallon,138,1740.18,Active
+Demo Store 07,Dairy,Cheese Block,99,1885.95,Active
+Demo Store 07,Dairy,Yogurt Cup,168,3153.36,Active
+Demo Store 07,Automotive,Motor Oil 1qt,0,0.0,No Movement
+Demo Store 07,Automotive,Windshield Fluid,166,1284.84,Active
+Demo Store 07,Automotive,Air Freshener,95,584.25,Active
+Demo Store 07,Health & Beauty,Pain Reliever,228,1871.88,Active
+Demo Store 07,Health & Beauty,Hand Sanitizer,37,371.11,Active
+Demo Store 07,Health & Beauty,Lip Balm,242,4312.44,Active
+Demo Store 08,Beverages,Cola 20oz,187,2922.81,Active
+Demo Store 08,Beverages,Energy Drink,240,604.8,Active
+Demo Store 08,Beverages,Bottled Water,33,454.74,Active
+Demo Store 08,Beverages,Iced Coffee,158,2431.62,Active
+Demo Store 08,Snacks,Potato Chips,103,300.76,Active
+Demo Store 08,Snacks,Chocolate Bar,156,3032.64,Active
+Demo Store 08,Snacks,Trail Mix,205,3097.55,Active
+Demo Store 08,Snacks,Beef Jerky,26,213.98,Active
+Demo Store 08,Tobacco,Cigarettes Pack,113,1405.72,Active
+Demo Store 08,Tobacco,Cigar Single,0,0.0,No Movement
+Demo Store 08,Tobacco,Vape Pod,183,1539.03,Active
+Demo Store 08,Grocery,Bread Loaf,22,387.2,Active
+Demo Store 08,Grocery,Canned Soup,0,0.0,No Movement
+Demo Store 08,Grocery,Pasta 1lb,228,1684.92,Active
+Demo Store 08,Grocery,Cooking Oil,37,284.9,Active
+Demo Store 08,Frozen,Ice Cream Tub,0,0.0,No Movement
+Demo Store 08,Frozen,Frozen Pizza,171,516.42,Active
+Demo Store 08,Frozen,Frozen Burrito,128,1987.84,Active
+Demo Store 08,Dairy,Milk Gallon,0,0.0,No Movement
+Demo Store 08,Dairy,Cheese Block,14,202.3,Active
+Demo Store 08,Dairy,Yogurt Cup,103,1483.2,Active
+Demo Store 08,Automotive,Motor Oil 1qt,0,0.0,No Movement
+Demo Store 08,Automotive,Windshield Fluid,189,3307.5,Active
+Demo Store 08,Automotive,Air Freshener,106,508.8,Active
+Demo Store 08,Health & Beauty,Pain Reliever,243,3382.56,Active
+Demo Store 08,Health & Beauty,Hand Sanitizer,200,3216.0,Active
+Demo Store 08,Health & Beauty,Lip Balm,89,1047.53,Active

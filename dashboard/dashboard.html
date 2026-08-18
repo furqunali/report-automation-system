@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report Automation System - Dashboard</title>
+<style>
+  :root{
+    --navy:#1F3B57; --teal:#187A7A; --teal-2:#2AA6A6; --bg:#f4f6f8;
+    --card:#ffffff; --ink:#1d2733; --muted:#6b7a8d; --line:#e5eaf0;
+    --good:#1f9d6b; --warn:#d9822b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--ink)}
+  header{background:linear-gradient(100deg,var(--navy),var(--teal));
+         color:#fff;padding:22px 28px}
+  header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.2px}
+  header p{margin:4px 0 0;font-size:13px;opacity:.85}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;
+       padding:16px 18px;box-shadow:0 1px 3px rgba(20,40,70,.05)}
+  .kpi .label{font-size:12px;color:var(--muted);text-transform:uppercase;
+              letter-spacing:.6px}
+  .kpi .value{font-size:26px;font-weight:700;margin-top:6px;color:var(--navy)}
+  .kpi.accent .value{color:var(--teal)}
+  .kpi.warn .value{color:var(--warn)}
+  .filters{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+  .filters label{font-size:12px;color:var(--muted);margin-right:6px}
+  select{padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+          background:#fff;font-size:14px;color:var(--ink);min-width:170px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:18px 20px;box-shadow:0 1px 3px rgba(20,40,70,.05)}
+  .card h2{margin:0 0 14px;font-size:15px;color:var(--navy)}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}
+  .bar-row .name{width:120px;color:var(--muted);white-space:nowrap;overflow:hidden;
+                 text-overflow:ellipsis}
+  .bar-track{flex:1;background:#eef2f6;border-radius:6px;height:16px;overflow:hidden;
+             display:block}
+  .bar-fill{display:block;height:100%;min-width:2px;border-radius:6px;
+            background:linear-gradient(90deg,var(--teal),var(--teal-2))}
+  .bar-row .val{width:92px;text-align:right;font-variant-numeric:tabular-nums;
+                color:var(--ink)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;
+     letter-spacing:.5px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;
+        font-weight:600}
+  .pill.active{background:#e6f4ee;color:var(--good)}
+  .pill.no{background:#fbeee0;color:var(--warn)}
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:30px}
+  .demo-tag{background:#fff3e0;color:#a15c00;border:1px solid #ffd8a8;
+            padding:6px 12px;border-radius:8px;font-size:12px;display:inline-block;
+            margin-top:10px}
+  @media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}
+    .grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>📊 Report Automation System — Monthly Dashboard</h1>
+  <p>Auto-generated from consolidated store reports · updates every run</p>
+</header>
+
+<div class="wrap">
+  <div class="demo-tag" id="demoTag" style="display:none">
+    Demo data — realistic sample figures, no real company data.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi accent"><div class="label">Total Sales</div>
+      <div class="value" id="kpiSales">—</div></div>
+    <div class="kpi"><div class="label">Total Quantity</div>
+      <div class="value" id="kpiQty">—</div></div>
+    <div class="kpi"><div class="label">Active Products</div>
+      <div class="value" id="kpiActive">—</div></div>
+    <div class="kpi warn"><div class="label">No Movement</div>
+      <div class="value" id="kpiNoMove">—</div></div>
+  </div>
+
+  <div class="filters card">
+    <div><label>Site</label>
+      <select id="fSite"><option value="">All sites</option></select></div>
+    <div><label>Category</label>
+      <select id="fCat"><option value="">All categories</option></select></div>
+    <div style="margin-left:auto;color:var(--muted);font-size:12px" id="rowInfo"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>Sales by Category</h2><div id="chartCat"></div></div>
+    <div class="card"><h2>Sales by Site</h2><div id="chartSite"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Top 10 Products by Sales</h2>
+    <table><thead><tr>
+      <th>#</th><th>Product</th><th>Category</th>
+      <th class="num">Quantity</th><th class="num">Sales</th><th>Status</th>
+    </tr></thead><tbody id="topBody"></tbody></table>
+  </div>
+
+  <footer>
+    Report Automation System · built by Furqan Ali ·
+    <span id="stamp"></span>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+const DATA = (window.REPORT_DATA && window.REPORT_DATA.records) || [];
+const money = n => "$" + Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
+const num   = n => Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
+
+function uniq(field){return [...new Set(DATA.map(r=>r[field]))].sort();}
+function fill(sel,vals){const s=document.getElementById(sel);
+  vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;
+  s.appendChild(o);});}
+fill("fSite",uniq("Site")); fill("fCat",uniq("Category"));
+
+function filtered(){
+  const site=document.getElementById("fSite").value;
+  const cat=document.getElementById("fCat").value;
+  return DATA.filter(r=>(!site||r.Site===site)&&(!cat||r.Category===cat));
+}
+
+function barChart(elId,rows){
+  const max=Math.max(...rows.map(r=>r[1]),1);
+  document.getElementById(elId).innerHTML = rows.map(([name,val])=>`
+    <div class="bar-row">
+      <span class="name" title="${name}">${name}</span>
+      <span class="bar-track"><span class="bar-fill"
+        style="width:${(val/max*100).toFixed(1)}%"></span></span>
+      <span class="val">${money(val)}</span>
+    </div>`).join("");
+}
+
+function groupSum(rows,key){
+  const m={};rows.forEach(r=>{m[r[key]]=(m[r[key]]||0)+Number(r.Sales||0);});
+  return Object.entries(m).sort((a,b)=>b[1]-a[1]);
+}
+
+function render(){
+  const rows=filtered();
+  const sales=rows.reduce((s,r)=>s+Number(r.Sales||0),0);
+  const qty=rows.reduce((s,r)=>s+Number(r.Quantity||0),0);
+  const noMove=rows.filter(r=>String(r.Status).toLowerCase()==="no movement").length;
+  document.getElementById("kpiSales").textContent=money(sales);
+  document.getElementById("kpiQty").textContent=num(qty);
+  document.getElementById("kpiActive").textContent=num(rows.length-noMove);
+  document.getElementById("kpiNoMove").textContent=num(noMove);
+  document.getElementById("rowInfo").textContent=rows.length+" records";
+
+  barChart("chartCat",groupSum(rows,"Category"));
+  barChart("chartSite",groupSum(rows,"Site"));
+
+  const top=[...rows].sort((a,b)=>Number(b.Sales)-Number(a.Sales)).slice(0,10);
+  document.getElementById("topBody").innerHTML=top.map((r,i)=>`
+    <tr><td>${i+1}</td><td>${r.Product}</td><td>${r.Category}</td>
+      <td class="num">${num(r.Quantity)}</td>
+      <td class="num">${money(r.Sales)}</td>
+      <td>${String(r.Status).toLowerCase()==="no movement"
+        ?'<span class="pill no">No Movement</span>'
+        :'<span class="pill active">Active</span>'}</td></tr>`).join("");
+}
+
+document.getElementById("fSite").addEventListener("change",render);
+document.getElementById("fCat").addEventListener("change",render);
+document.getElementById("stamp").textContent =
+  (window.REPORT_DATA && window.REPORT_DATA.summary
+    ? "Last run: "+window.REPORT_DATA.summary.processing_date : "");
+if(DATA.some(r=>String(r.Site).startsWith("Demo")))
+  document.getElementById("demoTag").style.display="inline-block";
+render();
+</script>
+</body>
+</html>

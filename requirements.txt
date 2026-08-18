@@ -1,0 +1,2 @@
+# Excel (.xlsx/.xlsm) support. CSV works with the standard library alone.
+openpyxl>=3.1
