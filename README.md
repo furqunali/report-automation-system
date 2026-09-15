@@ -2,7 +2,7 @@
 
 **Turn a folder of messy monthly store reports into one clean master dataset and an interactive KPI dashboard — in a single command.**
 
-🔗 **Live demo:** https://report-automation-dashboard.vercel.app
+🔗 **Live demo:** https://report-automation-dashboard.vercel.app  ·  🤗 **Hugging Face Space:** https://huggingface.co/spaces/FurqanAli12345/intelligent-business-reporting
 *(runs on fully anonymized sample data — `Demo Store 01…08`, generic products, no real business figures)*
 
 ---
