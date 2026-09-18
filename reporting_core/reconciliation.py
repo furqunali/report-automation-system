@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from math import isclose
+from numbers import Real
+
 
 @dataclass(frozen=True)
 class ReconciliationResult:
@@ -12,13 +14,18 @@ class ReconciliationResult:
     delta: float
     balanced: bool
 
+
 def reconcile_sales(expected_sales: float, observed_sales: float, *, tolerance: float = 0.01) -> ReconciliationResult:
+    if not isinstance(expected_sales, Real) or not isinstance(observed_sales, Real):
+        raise TypeError("sales values must be numeric")
     if tolerance < 0:
         raise ValueError("tolerance must be non-negative")
-    delta = float(observed_sales) - float(expected_sales)
+    expected = float(expected_sales)
+    observed = float(observed_sales)
+    delta = observed - expected
     return ReconciliationResult(
-        expected_sales=float(expected_sales),
-        observed_sales=float(observed_sales),
+        expected_sales=expected,
+        observed_sales=observed,
         delta=delta,
-        balanced=isclose(float(expected_sales), float(observed_sales), abs_tol=tolerance),
+        balanced=isclose(expected, observed, abs_tol=tolerance),
     )
