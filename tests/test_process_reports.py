@@ -30,3 +30,23 @@ def test_to_number_parses_accounting_negative_values():
     assert process_reports._to_number("(123.45)") == -123.45
     assert process_reports._to_number("$ (1,234.50)") == -1234.50
     assert process_reports._to_number("123.45") == 123.45
+
+
+def test_read_rows_normalizes_punctuated_and_variant_headers(tmp_path):
+    report = tmp_path / "messy.csv"
+    report.write_text(
+        "Store,Product Description,Qty Sold,Sales ($),Movement Status\n"
+        "Store 1,Item A,3,$12.50,Active\n",
+        encoding="utf-8",
+    )
+
+    rows = process_reports._read_rows(report)
+
+    assert rows == [{
+        "Site": "Store 1",
+        "Category": "",
+        "Product": "Item A",
+        "Quantity": 3,
+        "Sales": "$12.50",
+        "Status": "Active",
+    }]
