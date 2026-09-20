@@ -104,7 +104,9 @@ def _to_number(v) -> float:
         return 0.0
 
 
-def process() -> None:
+def process(now: datetime | None = None) -> Path | None:
+    """Process input reports using an injectable clock for reproducible runs."""
+    now = now or datetime.now()
     OUTPUT_DIR.mkdir(exist_ok=True)
     DASHBOARD_DIR.mkdir(exist_ok=True)
 
@@ -121,7 +123,7 @@ def process() -> None:
     master: list[dict] = []
     for fp in files:
         rows = _read_rows(fp)
-        stamp = datetime.now().strftime("%Y-%m-%d")
+        stamp = now.strftime("%Y-%m-%d")
         for row in rows:
             row["Report_Name"] = fp.stem
             row["Processing_Date"] = stamp
@@ -132,7 +134,7 @@ def process() -> None:
         print("No recognizable rows found. Check the report headers.")
         return
 
-    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    ts = now.strftime("%Y%m%d_%H%M%S")
     out_csv = OUTPUT_DIR / f"master_data_{ts}.csv"
     cols = CANONICAL + ["Report_Name", "Processing_Date"]
     with out_csv.open("w", newline="", encoding="utf-8") as f:
@@ -140,14 +142,15 @@ def process() -> None:
         w.writeheader()
         w.writerows(master)
 
-    _write_outputs(master, out_csv)
+    _write_outputs(master, out_csv, now)
     print("-" * 52)
     print(f"  master rows : {len(master)}")
     print(f"  written     : {out_csv.name}, summary_report.json, dashboard/data.js")
     print("  open dashboard/dashboard.html to view the KPIs")
+    return out_csv
 
 
-def _write_outputs(master: list[dict], out_csv: Path) -> None:
+def _write_outputs(master: list[dict], out_csv: Path, processed_at: datetime) -> None:
     total_sales = sum(_to_number(r["Sales"]) for r in master)
     total_qty = sum(_to_number(r["Quantity"]) for r in master)
     no_move = sum(1 for r in master
@@ -155,7 +158,7 @@ def _write_outputs(master: list[dict], out_csv: Path) -> None:
     active = len(master) - no_move
 
     summary = {
-        "processing_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "processing_date": processed_at.strftime("%Y-%m-%d %H:%M:%S"),
         "total_records": len(master),
         "total_sales": round(total_sales, 2),
         "total_quantity": round(total_qty, 2),
