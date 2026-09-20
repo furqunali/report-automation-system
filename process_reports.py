@@ -98,8 +98,13 @@ def _read_rows(path: Path) -> list[dict]:
 
 
 def _to_number(v) -> float:
+    text = str(v).replace(",", "").replace("$", "").strip()
+    if not text:
+        return 0.0
+    if text.startswith("(") and text.endswith(")"):
+        text = "-" + text[1:-1].strip()
     try:
-        return float(str(v).replace(",", "").replace("$", "").strip() or 0)
+        return float(text)
     except ValueError:
         return 0.0
 
