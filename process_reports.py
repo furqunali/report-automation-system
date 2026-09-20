@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -41,10 +42,10 @@ ALIASES = {
     "site": "Site", "location": "Site", "store": "Site", "branch": "Site",
     "category": "Category", "group": "Category", "product group": "Category",
     "department": "Category",
-    "product": "Product", "item": "Product", "description": "Product", "sku": "Product",
-    "quantity": "Quantity", "qty": "Quantity", "units": "Quantity",
+    "product": "Product", "item": "Product", "description": "Product", "product name": "Product", "product description": "Product", "sku": "Product",
+    "quantity": "Quantity", "qty": "Quantity", "units": "Quantity", "qty sold": "Quantity", "units sold": "Quantity",
     "qty ordered": "Quantity", "movement": "Quantity",
-    "sales": "Sales", "amount": "Sales", "total": "Sales", "cost": "Sales",
+    "sales": "Sales", "amount": "Sales", "total": "Sales", "cost": "Sales", "net sales": "Sales", "sales amount": "Sales",
     "extended cost": "Sales", "value": "Sales",
     "status": "Status", "movement status": "Status", "state": "Status",
 }
@@ -52,7 +53,7 @@ ALIASES = {
 
 def _norm(h: str) -> str | None:
     """Map a raw header to a canonical column name (or None if unknown)."""
-    key = (h or "").strip().lower()
+    key = re.sub(r"[^a-z0-9]+", " ", (h or "").strip().lower()).strip()
     return ALIASES.get(key)
 
 
