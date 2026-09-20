@@ -1,0 +1,43 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+      - name: Run tests
+        run: pytest -q
+      - name: Audit eligible LOC
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          extensions = {".py", ".js", ".jsx", ".ts", ".tsx", ".java", ".cpp", ".c", ".h", ".hpp", ".go", ".rs", ".rb", ".php", ".ps1"}
+          excluded = {"node_modules", "dist", "build", "coverage", ".venv", "venv", "vendor", "generated"}
+          loc = 0
+          files = 0
+          for p in Path(".").rglob("*"):
+              if not p.is_file() or p.suffix.lower() not in extensions:
+                  continue
+              if any(part in excluded for part in p.parts):
+                  continue
+              files += 1
+              loc += sum(1 for line in p.read_text(encoding="utf-8", errors="ignore").splitlines() if line.strip())
+          print(f"ELIGIBLE_LOC={loc}")
+          print(f"ELIGIBLE_FILES={files}")
+          print("STATUS=MEETS_5000" if loc >= 5000 else "STATUS=BELOW_5000")
+          PY
