@@ -5,7 +5,14 @@ from reporting_core.models import ReportRow
 
 
 def row(site, product, sales):
-    return ReportRow(site=site, product=product, sales=sales)
+    return ReportRow(
+        site=site,
+        category="General",
+        product=product,
+        quantity=1,
+        sales=sales,
+        status="Active",
+    )
 
 
 def test_aggregate_kpis_calculates_totals_and_leaders():
