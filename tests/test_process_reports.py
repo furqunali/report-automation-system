@@ -24,3 +24,9 @@ def test_process_uses_injected_clock_for_all_output_timestamps(tmp_path, monkeyp
     assert rows[1].endswith(",2026-09-21")
     summary = (output_dir / "summary_report.json").read_text(encoding="utf-8")
     assert '"processing_date": "2026-09-21 14:30:45"' in summary
+
+
+def test_to_number_parses_accounting_negative_values():
+    assert process_reports._to_number("(123.45)") == -123.45
+    assert process_reports._to_number("$ (1,234.50)") == -1234.50
+    assert process_reports._to_number("123.45") == 123.45
