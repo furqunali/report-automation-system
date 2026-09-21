@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
 import sys
 from dataclasses import dataclass
 from datetime import datetime
@@ -122,6 +123,9 @@ def run_pipeline(
     Raises:
         NotADirectoryError: if ``input_dir`` does not exist or is not a dir.
     """
+    if not math.isfinite(tolerance) or tolerance < 0:
+        raise ValueError("tolerance must be a finite non-negative number")
+
     now = now or datetime.now()
     input_dir = Path(input_dir)
     output_dir = Path(output_dir)
@@ -238,7 +242,7 @@ def main(argv: list[str] | None = None) -> int:
             report_name=args.report_name,
             tolerance=args.tolerance,
         )
-    except NotADirectoryError as exc:
+    except (NotADirectoryError, ValueError) as exc:
         parser.error(str(exc))  # exits with code 2
 
     _print_report(result)

@@ -117,3 +117,19 @@ def test_main_reports_missing_input_as_usage_error(tmp_path):
     with pytest.raises(SystemExit) as excinfo:
         cli.main(["--input", str(tmp_path / "nope"), "--output", str(tmp_path)])
     assert excinfo.value.code == 2
+
+
+@pytest.mark.parametrize("tolerance", [-1.0, float("nan"), float("inf")])
+def test_invalid_tolerance_is_rejected(tolerance, tmp_path):
+    with pytest.raises(ValueError, match="tolerance"):
+        cli.run_pipeline(SAMPLE_DATA, tmp_path, tolerance=tolerance)
+
+
+def test_main_reports_invalid_tolerance_as_usage_error(tmp_path):
+    with pytest.raises(SystemExit) as excinfo:
+        cli.main([
+            "--input", str(SAMPLE_DATA),
+            "--output", str(tmp_path),
+            "--tolerance", "-1",
+        ])
+    assert excinfo.value.code == 2
