@@ -43,6 +43,8 @@ def coerce_number(value: Any) -> float:
     negatives (``(1,234.50)`` -> ``-1234.50``). Unparseable cells become 0.0,
     so a single bad row never breaks a run.
     """
+    if isinstance(value, bool):
+        return 0.0
     text = str(value).replace(",", "").replace("$", "").strip()
     if not text:
         return 0.0
