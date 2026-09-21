@@ -50,3 +50,22 @@ def test_read_rows_normalizes_punctuated_and_variant_headers(tmp_path):
         "Sales": "$12.50",
         "Status": "Active",
     }]
+
+
+def test_read_rows_closes_loaded_workbook(tmp_path, monkeypatch):
+    report = tmp_path / "report.xlsx"
+    report.write_bytes(b"placeholder")
+    class Sheet:
+        def iter_rows(self, values_only=True):
+            return iter([("Site", "Product"), ("Store 1", "Item A")])
+    class Workbook:
+        worksheets = [Sheet()]
+        closed = False
+        def close(self):
+            self.closed = True
+    workbook = Workbook()
+    import types
+    monkeypatch.setitem(__import__("sys").modules, "openpyxl",
+                        types.SimpleNamespace(load_workbook=lambda *args, **kwargs: workbook))
+    assert process_reports._read_rows(report)[0]["Product"] == "Item A"
+    assert workbook.closed is True
