@@ -10,3 +10,13 @@ def test_reconciliation_rejects_non_numeric_values():
 def test_reconciliation_accepts_values_within_tolerance():
     result = reconcile_sales(100, 100.005, tolerance=0.01)
     assert result.balanced is True
+
+
+def test_reconciliation_rejects_nonfinite_values():
+    import math
+    for value in (math.nan, math.inf, -math.inf):
+        try:
+            reconcile_sales(value, 100)
+        except ValueError:
+            continue
+        raise AssertionError("expected ValueError")

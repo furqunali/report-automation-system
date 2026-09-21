@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import isclose
+from math import isclose, isfinite
 from numbers import Real
 
 
@@ -22,6 +22,8 @@ def reconcile_sales(expected_sales: float, observed_sales: float, *, tolerance: 
         raise ValueError("tolerance must be non-negative")
     expected = float(expected_sales)
     observed = float(observed_sales)
+    if not isfinite(expected) or not isfinite(observed):
+        raise ValueError("sales values must be finite")
     delta = observed - expected
     return ReconciliationResult(
         expected_sales=expected,
