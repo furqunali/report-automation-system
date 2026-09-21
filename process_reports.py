@@ -90,7 +90,7 @@ def _read_rows(path: Path) -> list[dict]:
         for raw_h, val in rr.items():
             col = _norm(str(raw_h))
             if col:
-                mapped[col] = val if val is not None else ""
+                mapped[col] = _to_number(val) if col == "Quantity" and val not in (None, "") else (val if val is not None else "")
                 hit = True
         # keep only rows that carried at least a product/site signal
         if hit and (mapped["Product"] or mapped["Site"]):
