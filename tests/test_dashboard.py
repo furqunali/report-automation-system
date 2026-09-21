@@ -155,3 +155,8 @@ def test_emitted_fields_match_what_dashboard_html_reads():
     # Every record field we emit must be referenced by the dashboard script.
     for field in RECORD_FIELDS:
         assert field in html, f"dashboard.html does not reference record field {field!r}"
+
+
+def test_coerce_number_matches_ingestion_for_booleans():
+    assert coerce_number(True) == 0.0
+    assert coerce_number(False) == 0.0
