@@ -127,6 +127,12 @@ python process_reports.py
 | `Sales` | Sales / cost value |
 | `Status` | `Active` or `No Movement` |
 
+## 📚 Documentation
+
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) — step-by-step: drop files → run → read the dashboard, with the real command, expected console output, and troubleshooting.
+- [`docs/DATA_SCHEMA.md`](docs/DATA_SCHEMA.md) — the canonical schema (`models.py`) plus the exact header-alias, numeric-coercion, status, and validation rules.
+- [`docs/ENGINEERING_STANDARDS.md`](docs/ENGINEERING_STANDARDS.md) — reporting-integrity and testing standards.
+
 ## 🔒 Security
 
 - **No real business data.** This public repo ships **anonymized sample data only** — generic store names, generic products, deterministically generated figures.
