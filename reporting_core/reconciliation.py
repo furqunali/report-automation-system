@@ -18,8 +18,11 @@ class ReconciliationResult:
 def reconcile_sales(expected_sales: float, observed_sales: float, *, tolerance: float = 0.01) -> ReconciliationResult:
     if not isinstance(expected_sales, Real) or not isinstance(observed_sales, Real):
         raise TypeError("sales values must be numeric")
-    if tolerance < 0:
-        raise ValueError("tolerance must be non-negative")
+    if not isinstance(tolerance, Real) or isinstance(tolerance, bool):
+        raise TypeError("tolerance must be numeric")
+    tolerance = float(tolerance)
+    if not isfinite(tolerance) or tolerance < 0:
+        raise ValueError("tolerance must be a finite non-negative number")
     expected = float(expected_sales)
     observed = float(observed_sales)
     if not isfinite(expected) or not isfinite(observed):
