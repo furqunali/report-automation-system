@@ -11,13 +11,14 @@ contract and renders it as the ``data.js`` file the dashboard loads over
 key order, stable float rounding), so re-runs are reproducible and diffs stay
 readable.
 
-Keeping this here (rather than inline in ``process_reports.py``) makes the
+Keeping this here (rather than inline in `process_reports.py`) makes the
 dashboard payload a first-class, independently testable contract: the same
 logic powers both the CLI and any future caller.
 """
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -51,9 +52,10 @@ def coerce_number(value: Any) -> float:
     if text.startswith("(") and text.endswith(")"):
         text = "-" + text[1:-1].strip()
     try:
-        return float(text)
+        number = float(text)
     except ValueError:
         return 0.0
+    return number if math.isfinite(number) else 0.0
 
 
 def is_no_movement(status: Any) -> bool:

@@ -39,6 +39,12 @@ def test_coerce_number_handles_currency_commas_and_accounting_negatives():
     assert coerce_number(42) == 42.0
 
 
+def test_coerce_number_ignores_non_finite_numbers():
+    assert coerce_number("NaN") == 0.0
+    assert coerce_number("inf") == 0.0
+    assert coerce_number("-Infinity") == 0.0
+
+
 def test_is_no_movement_is_case_insensitive():
     assert is_no_movement("No Movement")
     assert is_no_movement("  INACTIVE ")
