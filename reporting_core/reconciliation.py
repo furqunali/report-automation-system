@@ -32,5 +32,5 @@ def reconcile_sales(expected_sales: float, observed_sales: float, *, tolerance: 
         expected_sales=expected,
         observed_sales=observed,
         delta=delta,
-        balanced=isclose(expected, observed, abs_tol=tolerance),
+        balanced=isclose(expected, observed, rel_tol=0.0, abs_tol=tolerance),
     )
