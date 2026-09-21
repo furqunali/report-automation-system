@@ -10,7 +10,11 @@ class ReconciliationBatchSummary:
     balanced: int
     unbalanced: int
     total_absolute_delta: float
+    balanced_rate: float
+    maximum_absolute_delta: float
 
 def summarize_reconciliations(results: Iterable[ReconciliationResult]) -> ReconciliationBatchSummary:
     items = list(results)
-    return ReconciliationBatchSummary(len(items), sum(r.balanced for r in items), sum(not r.balanced for r in items), round(sum(abs(r.delta) for r in items), 2))
+    absolute_deltas = [abs(r.delta) for r in items]
+    balanced = sum(r.balanced for r in items)
+    return ReconciliationBatchSummary(len(items), balanced, len(items) - balanced, round(sum(absolute_deltas), 2), round(balanced / len(items), 4) if items else 0.0, round(max(absolute_deltas), 2) if items else 0.0)
