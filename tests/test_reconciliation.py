@@ -37,3 +37,8 @@ def test_reconciliation_rejects_invalid_tolerance():
         pass
     else:
         raise AssertionError("expected TypeError")
+
+
+def test_reconciliation_tolerance_is_absolute_only():
+    result = reconcile_sales(1_000_000_000, 1_000_000_000.50, tolerance=0.01)
+    assert result.balanced is False
