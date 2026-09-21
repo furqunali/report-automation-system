@@ -99,15 +99,10 @@ def _read_rows(path: Path) -> list[dict]:
 
 
 def _to_number(v) -> float:
-    text = str(v).replace(",", "").replace("$", "").strip()
-    if not text:
-        return 0.0
-    if text.startswith("(") and text.endswith(")"):
-        text = "-" + text[1:-1].strip()
-    try:
-        return float(text)
-    except ValueError:
-        return 0.0
+    # Single source of truth for messy-cell parsing, shared with the dashboard
+    # payload builder so the CSV, summary and data.js always agree.
+    from reporting_core.dashboard import coerce_number
+    return coerce_number(v)
 
 
 def process(now: datetime | None = None) -> Path | None:
@@ -157,28 +152,20 @@ def process(now: datetime | None = None) -> Path | None:
 
 
 def _write_outputs(master: list[dict], out_csv: Path, processed_at: datetime) -> None:
-    total_sales = sum(_to_number(r["Sales"]) for r in master)
-    total_qty = sum(_to_number(r["Quantity"]) for r in master)
-    no_move = sum(1 for r in master
-                  if str(r["Status"]).strip().lower() in ("no movement", "inactive"))
-    active = len(master) - no_move
+    from reporting_core.dashboard import build_dashboard_payload, render_data_js
 
-    summary = {
-        "processing_date": processed_at.strftime("%Y-%m-%d %H:%M:%S"),
-        "total_records": len(master),
-        "total_sales": round(total_sales, 2),
-        "total_quantity": round(total_qty, 2),
-        "active_products": active,
-        "no_movement": no_move,
-        "master_file": out_csv.name,
-    }
+    payload = build_dashboard_payload(
+        master,
+        processing_date=processed_at.strftime("%Y-%m-%d %H:%M:%S"),
+        master_file=out_csv.name,
+    )
+
     (OUTPUT_DIR / "summary_report.json").write_text(
-        json.dumps(summary, indent=2), encoding="utf-8")
+        json.dumps(payload["summary"], indent=2), encoding="utf-8")
 
     # data.js keeps the dashboard fully static (works via file://)
-    payload = {"summary": summary, "records": master}
     (DASHBOARD_DIR / "data.js").write_text(
-        "window.REPORT_DATA = " + json.dumps(payload) + ";", encoding="utf-8")
+        render_data_js(payload), encoding="utf-8")
 
 
 # --------------------------------------------------------------------------- #
