@@ -17,9 +17,4 @@ def summarize_reconciliations(results: Iterable[ReconciliationResult]) -> Reconc
     items = list(results)
     absolute_deltas = [abs(r.delta) for r in items]
     balanced = sum(r.balanced for r in items)
-    return ReconciliationBatchSummary(
-        len(items), balanced, len(items) - balanced,
-        round(sum(absolute_deltas), 2),
-        round(balanced / len(items), 4) if items else 0.0,
-        round(max(absolute_deltas), 2) if items else 0.0,
-    )
+    return ReconciliationBatchSummary(len(items), balanced, len(items) - balanced, round(sum(absolute_deltas), 2), round(balanced / len(items), 4) if items else 0.0, round(max(absolute_deltas), 2) if items else 0.0)
