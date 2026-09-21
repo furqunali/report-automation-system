@@ -71,15 +71,18 @@ def _read_rows(path: Path) -> list[dict]:
                   f"({path.name}). Run: pip install openpyxl")
             return []
         wb = load_workbook(path, read_only=True, data_only=True)
-        for ws in wb.worksheets:
-            rows = ws.iter_rows(values_only=True)
-            try:
-                headers = [str(c) if c is not None else "" for c in next(rows)]
-            except StopIteration:
-                continue
-            for r in rows:
-                raw_rows.append({headers[i]: r[i] for i in range(len(headers))
-                                 if i < len(r)})
+        try:
+            for ws in wb.worksheets:
+                rows = ws.iter_rows(values_only=True)
+                try:
+                    headers = [str(c) if c is not None else "" for c in next(rows)]
+                except StopIteration:
+                    continue
+                for r in rows:
+                    raw_rows.append({headers[i]: r[i] for i in range(len(headers))
+                                     if i < len(r)})
+        finally:
+            wb.close()
     else:
         return []
 
