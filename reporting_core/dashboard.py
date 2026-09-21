@@ -11,7 +11,7 @@ contract and renders it as the ``data.js`` file the dashboard loads over
 key order, stable float rounding), so re-runs are reproducible and diffs stay
 readable.
 
-Keeping this here (rather than inline in ``process_reports.py``) makes the
+Keeping this here (rather than inline in `process_reports.py`) makes the
 dashboard payload a first-class, independently testable contract: the same
 logic powers both the CLI and any future caller.
 """
@@ -23,17 +23,27 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+# Fields the dashboard's JavaScript reads off every record. Kept first, in this
+# order, in each emitted record; any extra keys are preserved afterwards so the
+# payload stays forward-compatible with new columns.
 RECORD_FIELDS: tuple[str, ...] = (
     "Site", "Category", "Product", "Quantity", "Sales", "Status",
 )
 
+# Status labels that count as "no movement" (case-insensitive), matching both
+# the processor and the dashboard's own client-side classification.
 NO_MOVEMENT_STATUSES = frozenset({"no movement", "inactive"})
 
 Record = Mapping[str, Any]
 
 
 def coerce_number(value: Any) -> float:
-    """Parse a messy sales/quantity cell into a finite float."""
+    """Parse a messy sales/quantity cell into a float.
+
+    Tolerates thousands separators, currency symbols and accounting-style
+    negatives (``(1,234.50)`` -> ``-1234.50``). Unparseable cells become 0.0,
+    so a single bad row never breaks a run.
+    """
     if isinstance(value, bool):
         return 0.0
     text = str(value).replace(",", "").replace("$", "").strip()
@@ -55,6 +65,8 @@ def is_no_movement(status: Any) -> bool:
 
 @dataclass(frozen=True)
 class DashboardSummary:
+    """The ``summary`` block of ``window.REPORT_DATA``."""
+
     processing_date: str
     total_records: int
     total_sales: float
@@ -80,6 +92,7 @@ def build_summary(
     processing_date: str,
     master_file: str = "",
 ) -> DashboardSummary:
+    """Compute stable run-level KPIs from processed records."""
     total_sales = sum(coerce_number(r.get("Sales")) for r in records)
     total_quantity = sum(coerce_number(r.get("Quantity")) for r in records)
     no_movement = sum(1 for r in records if is_no_movement(r.get("Status")))
@@ -95,6 +108,12 @@ def build_summary(
 
 
 def normalize_record(record: Record) -> dict[str, Any]:
+    """Return a record with the dashboard's expected fields first (defaulting
+    to an empty string when missing), followed by any extra keys unchanged.
+
+    Values are passed through as-is; the dashboard coerces types client-side,
+    so both ``"806.38"`` and ``806.38`` render identically.
+    """
     ordered: dict[str, Any] = {field: record.get(field, "") for field in RECORD_FIELDS}
     for key, value in record.items():
         if key not in ordered:
@@ -107,6 +126,7 @@ def build_dashboard_payload(
     processing_date: str,
     master_file: str = "",
 ) -> dict[str, Any]:
+    """Build the full ``window.REPORT_DATA`` payload (summary + records)."""
     summary = build_summary(records, processing_date, master_file)
     return {
         "summary": summary.as_dict(),
@@ -115,11 +135,17 @@ def build_dashboard_payload(
 
 
 def render_data_js(payload: Mapping[str, Any]) -> str:
+    """Render a payload as the exact ``data.js`` the dashboard loads.
+
+    Keys are sorted and separators are compact, so identical inputs always
+    produce identical bytes regardless of source dict ordering.
+    """
     body = json.dumps(payload, sort_keys=True, separators=(",", ":"))
     return f"window.REPORT_DATA = {body};\n"
 
 
 def write_data_js(payload: Mapping[str, Any], path: str | Path) -> Path:
+    """Write ``payload`` to ``path`` as ``data.js`` and return the path."""
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(render_data_js(payload), encoding="utf-8")
@@ -132,5 +158,6 @@ def generate_data_js(
     processing_date: str,
     master_file: str = "",
 ) -> Path:
+    """One-shot: build the payload from ``records`` and write ``data.js``."""
     payload = build_dashboard_payload(records, processing_date, master_file)
     return write_data_js(payload, path)
