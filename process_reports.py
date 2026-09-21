@@ -110,6 +110,8 @@ def _to_number(v) -> float:
 
 def process(now: datetime | None = None) -> Path | None:
     """Process input reports using an injectable clock for reproducible runs."""
+    if now is not None and not isinstance(now, datetime):
+        raise TypeError("now must be a datetime or None")
     now = now or datetime.now()
     OUTPUT_DIR.mkdir(exist_ok=True)
     DASHBOARD_DIR.mkdir(exist_ok=True)
