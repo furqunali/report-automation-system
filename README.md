@@ -116,6 +116,29 @@ python process_reports.py
 | `automation/File_Watcher.ps1` | Auto-process any new file added to the input folder |
 | `automation/Create_Scheduled_Task.ps1` | Register a daily 8 AM run (run once, elevated) |
 
+### Composable CLI
+
+For scripted/CI use you can run the full pipeline over an arbitrary pair of
+directories — **ingestion → reconciliation → KPIs → master CSV** — without
+touching the fixed project folders. This repo ships no packaging metadata, so
+invoke it as a module with the project root on `PYTHONPATH`:
+
+```bash
+PYTHONPATH=. python -m reporting_core.cli --input sample_data --output 03_output
+```
+
+| Flag | Purpose |
+|------|---------|
+| `-i, --input` | Directory scanned for `.csv`/`.xlsx`/`.xlsm` reports |
+| `-o, --output` | Directory the timestamped `master_data_*.csv` is written to |
+| `--report-name` | Override the per-file provenance label (defaults to the file stem) |
+| `--tolerance` | Absolute tolerance for the sales reconciliation (default `0.01`) |
+
+After the master CSV is written it is read back and its sales total is
+reconciled against the freshly computed KPI total. A mismatch (dropped row,
+encoding/write bug) exits **non-zero** instead of shipping a corrupt master
+table, so the CLI is safe to gate a pipeline on.
+
 ### Canonical schema
 
 | Column | Description |
