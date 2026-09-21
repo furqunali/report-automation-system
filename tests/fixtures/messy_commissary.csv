@@ -1,0 +1,7 @@
+Store Name,Product Group,Item Description,Qty Sold,Sales ($),Movement Status
+Demo Store 01,Beverages,Cola 20oz,46,"$806.38",Active
+Demo Store 01,Snacks,Potato Chips,0,"$0.00",No Movement
+Demo Store 02,Grocery,Bread Loaf,"1,204","$3,014.50",
+Demo Store 02,Automotive,Motor Oil 1qt,7,"($12.50)",Active
+,,,,,
+Demo Store 03,Dairy,Milk Gallon,88,1899.20,ACTIVE
