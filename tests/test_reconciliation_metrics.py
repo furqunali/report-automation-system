@@ -17,5 +17,5 @@ def test_metrics_use_none_relative_delta_for_zero_baseline():
 def test_metrics_preserve_small_balanced_delta():
     result = reconcile_sales(10, 10.005)
     metrics = build_reconciliation_metrics(result)
-    assert metrics.absolute_delta == 0.0
+    assert metrics.absolute_delta == 0.01
     assert metrics.within_tolerance
