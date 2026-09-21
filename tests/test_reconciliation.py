@@ -20,3 +20,20 @@ def test_reconciliation_rejects_nonfinite_values():
         except ValueError:
             continue
         raise AssertionError("expected ValueError")
+
+
+def test_reconciliation_rejects_invalid_tolerance():
+    import math
+    for tolerance in (math.nan, math.inf, -math.inf):
+        try:
+            reconcile_sales(100, 100, tolerance=tolerance)
+        except ValueError:
+            continue
+        raise AssertionError("expected ValueError")
+
+    try:
+        reconcile_sales(100, 100, tolerance="0.01")
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("expected TypeError")
