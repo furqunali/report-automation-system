@@ -1,6 +1,8 @@
 """Validated dashboard filter contract."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class FilterContract:
@@ -8,7 +10,7 @@ class FilterContract:
     category: str | None = None
     product: str | None = None
 
-    def normalized(self) -> "FilterContract":
+    def normalized(self) -> FilterContract:
         clean=lambda value: value.strip() if isinstance(value,str) and value.strip() else None
         return FilterContract(clean(self.site),clean(self.category),clean(self.product))
 

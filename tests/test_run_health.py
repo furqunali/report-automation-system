@@ -1,6 +1,7 @@
 from reporting_core.run_health import assess_run
 from reporting_core.run_summary import build_run_summary
 
+
 def test_run_health_classifies_successful_run():
     health = assess_run(build_run_summary(10, 10, 0, 120.0))
     assert health.status == "healthy"

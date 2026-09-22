@@ -1,6 +1,8 @@
 """Summarize an automation run for logs and dashboard handoff."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class RunSummary:

@@ -1,6 +1,7 @@
 from reporting_core.reconciliation import reconcile_sales
 from reporting_core.reconciliation_signed_delta import mean_signed_delta
 
+
 def test_mean_signed_delta_preserves_direction():
     results = [reconcile_sales(100,102), reconcile_sales(100,98)]
     assert mean_signed_delta(results) == 0.0

@@ -1,7 +1,10 @@
 """Signed-delta summaries for reconciliation batches."""
 from __future__ import annotations
-from typing import Iterable
+
+from collections.abc import Iterable
+
 from reporting_core.reconciliation import ReconciliationResult
+
 
 def mean_signed_delta(results: Iterable[ReconciliationResult]) -> float:
     deltas = [float(result.delta) for result in results]

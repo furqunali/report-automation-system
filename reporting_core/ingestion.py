@@ -20,9 +20,9 @@ from __future__ import annotations
 
 import csv
 import re
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Iterable, Iterator, Mapping, Sequence
 
 from .models import ReportRow, Status
 

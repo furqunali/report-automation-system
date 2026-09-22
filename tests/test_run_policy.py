@@ -1,6 +1,7 @@
 from reporting_core.run_health import RunHealth
 from reporting_core.run_policy import evaluate_run
 
+
 def test_run_policy_reports_invalid_rows():
     findings = evaluate_run(RunHealth("degraded", 0.8, 0.2, True))
     assert findings[0].code == "INVALID_ROWS"

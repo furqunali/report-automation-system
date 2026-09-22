@@ -6,6 +6,7 @@ from math import isfinite
 
 from reporting_core.reconciliation import ReconciliationResult
 
+
 @dataclass(frozen=True)
 class ReconciliationMetrics:
     absolute_delta: float
