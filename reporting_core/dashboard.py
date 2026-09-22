@@ -93,6 +93,8 @@ def build_summary(
     master_file: str = "",
 ) -> DashboardSummary:
     """Compute stable run-level KPIs from processed records."""
+    if any(not isinstance(record, Mapping) for record in records):
+        raise TypeError("records must contain mapping values")
     total_sales = sum(coerce_number(r.get("Sales")) for r in records)
     total_quantity = sum(coerce_number(r.get("Quantity")) for r in records)
     no_movement = sum(1 for r in records if is_no_movement(r.get("Status")))
