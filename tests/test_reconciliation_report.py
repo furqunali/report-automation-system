@@ -16,3 +16,7 @@ def test_reconciliation_export_rejects_wrong_type():
         pass
     else:
         raise AssertionError("expected TypeError")
+
+
+def test_export_enforces_schema():
+    assert reconciliation_report_dict(ReconciliationHealth(1, 1, 0, 1.0))["count"] == 1
