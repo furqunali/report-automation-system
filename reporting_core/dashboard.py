@@ -114,6 +114,8 @@ def normalize_record(record: Record) -> dict[str, Any]:
     Values are passed through as-is; the dashboard coerces types client-side,
     so both ``"806.38"`` and ``806.38`` render identically.
     """
+    if not isinstance(record, Mapping):
+        raise TypeError("record must be a mapping")
     ordered: dict[str, Any] = {field: record.get(field, "") for field in RECORD_FIELDS}
     for key, value in record.items():
         if key not in ordered:

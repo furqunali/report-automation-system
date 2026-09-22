@@ -166,3 +166,9 @@ def test_emitted_fields_match_what_dashboard_html_reads():
 def test_coerce_number_matches_ingestion_for_booleans():
     assert coerce_number(True) == 0.0
     assert coerce_number(False) == 0.0
+
+
+def test_normalize_record_rejects_non_mapping():
+    import pytest
+    with pytest.raises(TypeError, match="record must be a mapping"):
+        normalize_record(None)  # type: ignore[arg-type]
