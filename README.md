@@ -162,6 +162,12 @@ table, so the CLI is safe to gate a pipeline on.
 - **Real data can't be committed by accident.** `.gitignore` blocks the entire `01_input_reports/` folder (except the tracked `*DEMO*` sample), all `03_output/` artifacts, logs, and every raw `*.xlsx`/`*.xlsm`/`*.xls` workbook as a safety net.
 - **No secrets in code.** The pipeline reads local files only; any environment-specific configuration stays in the environment, never in the repo.
 
+
+
+## Reliability Hardening
+
+Processing accepts an injected clock for deterministic runs and validates that dependency at the boundary. Workbook resources are closed after ingestion, reconciliation tolerances are validated as absolute finite values, and non-finite reconciliation totals are rejected before output is accepted.
+
 ## 🗺️ Roadmap
 
 - Additional input formats and richer header-alias coverage
