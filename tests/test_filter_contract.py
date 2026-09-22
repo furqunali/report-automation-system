@@ -1,5 +1,6 @@
 from reporting_core.filter_contract import FilterContract, matches_filters
 
+
 class Row:
     site="A"
     category="Shoes"

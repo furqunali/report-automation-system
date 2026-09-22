@@ -1,6 +1,6 @@
-from pathlib import Path
 
 import process_reports
+
 
 def test_demo_generation_is_reproducible_shape(tmp_path, monkeypatch):
     monkeypatch.setattr(process_reports, "BASE", tmp_path)

@@ -1,7 +1,10 @@
 """Data-quality metrics for monthly report runs."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from .models import ReportRow
+
 
 @dataclass(frozen=True)
 class QualityReport:

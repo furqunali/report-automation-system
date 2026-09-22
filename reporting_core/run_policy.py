@@ -1,7 +1,10 @@
 """Policy findings derived from report run health."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from reporting_core.run_health import RunHealth
+
 
 @dataclass(frozen=True)
 class RunFinding:

@@ -1,5 +1,6 @@
 from reporting_core.reconciliation_summary import summarize_reconciliation
 
+
 def test_summary_marks_balanced_totals():
     result=summarize_reconciliation(10,10.005)
     assert result.balanced

@@ -1,5 +1,9 @@
 from reporting_core.reconciliation_health import ReconciliationHealth
-from reporting_core.reconciliation_report import reconciliation_report_dict, reconciliation_report_json
+from reporting_core.reconciliation_report import (
+    reconciliation_report_dict,
+    reconciliation_report_json,
+)
+
 
 def test_reconciliation_export_is_deterministic():
     result = ReconciliationHealth(10, 8, 2, 0.8)

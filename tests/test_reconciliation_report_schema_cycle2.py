@@ -1,5 +1,6 @@
 from reporting_core.reconciliation_report_schema import validate_reconciliation_report
 
+
 def test_reconciliation_report_rejects_wrong_ratio():
     payload = {"count": 4, "balanced": 3, "unbalanced": 1, "balanced_ratio": 0.5}
     assert not validate_reconciliation_report(payload)

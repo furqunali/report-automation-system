@@ -1,7 +1,10 @@
 """Summarize reconciliation outcomes for automation logs."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from reporting_core.reconciliation import ReconciliationResult, reconcile_sales
+
 
 @dataclass(frozen=True)
 class ReconciliationSummary:

@@ -1,5 +1,7 @@
 import pytest
+
 from reporting_core.export_contract import ExportContract, build_export_contract
+
 
 def test_export_contract_rounds_sales_and_preserves_rows():
     contract = build_export_contract([{"site":"A","sales":10}], 10.126)

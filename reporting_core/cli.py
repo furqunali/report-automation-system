@@ -37,6 +37,7 @@ from datetime import datetime
 from pathlib import Path
 
 import process_reports
+
 from .kpis import KPIResult, aggregate_kpis
 from .models import ReportRow
 from .reconciliation import ReconciliationResult, reconcile_sales

@@ -1,8 +1,11 @@
 """Batch-level summaries for deterministic report reconciliation."""
 from __future__ import annotations
+
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Iterable
+
 from reporting_core.reconciliation import ReconciliationResult
+
 
 @dataclass(frozen=True)
 class ReconciliationBatchSummary:

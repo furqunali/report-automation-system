@@ -1,7 +1,10 @@
 """Deterministic health classification for report automation runs."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from reporting_core.run_summary import RunSummary
+
 
 @dataclass(frozen=True)
 class RunHealth:

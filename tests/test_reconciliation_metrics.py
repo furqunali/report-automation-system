@@ -1,6 +1,7 @@
 from reporting_core.reconciliation import reconcile_sales
 from reporting_core.reconciliation_metrics import build_reconciliation_metrics
 
+
 def test_metrics_report_absolute_and_relative_delta():
     result = reconcile_sales(100, 102)
     metrics = build_reconciliation_metrics(result)

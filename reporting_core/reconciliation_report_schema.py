@@ -1,5 +1,6 @@
 """Schema validation for exported reconciliation health reports."""
 from __future__ import annotations
+
 REQUIRED_FIELDS = frozenset({"count","balanced","unbalanced","balanced_ratio"})
 def validate_reconciliation_report(payload: dict) -> bool:
     if not isinstance(payload, dict) or set(payload) != REQUIRED_FIELDS: return False

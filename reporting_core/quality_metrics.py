@@ -1,8 +1,11 @@
 """Quality metrics and deterministic validation summaries for report runs."""
 from __future__ import annotations
-from dataclasses import dataclass, asdict
-from typing import Iterable, Mapping, Any
+
 import math
+from collections.abc import Iterable, Mapping
+from dataclasses import asdict, dataclass
+from typing import Any
+
 
 @dataclass(frozen=True)
 class QualityMetric:

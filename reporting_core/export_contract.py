@@ -1,7 +1,9 @@
 """Validated export contract for report and dashboard handoff."""
 from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Any
+
 
 @dataclass(frozen=True)
 class ExportContract:

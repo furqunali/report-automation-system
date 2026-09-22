@@ -1,7 +1,10 @@
 """Aggregate deterministic report run policy findings."""
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from reporting_core.run_policy import RunFinding
+
 
 @dataclass(frozen=True)
 class RunPolicySummary:

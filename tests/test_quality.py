@@ -1,6 +1,7 @@
 from reporting_core.models import ReportRow
 from reporting_core.quality import profile_rows
 
+
 def test_profile_rows_counts_valid_business_dimensions():
     rows = [ReportRow("A","Food","Rice",2,10,"Active"),
             ReportRow("B","Food","Tea",1,5,"Active")]

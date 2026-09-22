@@ -1,5 +1,6 @@
 from reporting_core.reconciliation import reconcile_sales
 
+
 def test_reconciliation_rejects_non_numeric_values():
     try:
         reconcile_sales("100", 100)

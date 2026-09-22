@@ -10,9 +10,9 @@ yields the same report - safe to diff in tests and in the dashboard handoff.
 """
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 from numbers import Real
-from typing import Mapping
 
 from .models import ReportRow
 from .validation import validate_row
