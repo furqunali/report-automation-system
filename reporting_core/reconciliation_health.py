@@ -13,6 +13,8 @@ class ReconciliationHealth:
 
 def summarize_reconciliation_health(results: Iterable[ReconciliationResult]) -> ReconciliationHealth:
     items = list(results)
+    if any(not isinstance(item, ReconciliationResult) for item in items):
+        raise TypeError("results must contain ReconciliationResult values")
     balanced = sum(item.balanced for item in items)
     count = len(items)
     return ReconciliationHealth(count, balanced, count - balanced, round(balanced / count, 4) if count else 0.0)
