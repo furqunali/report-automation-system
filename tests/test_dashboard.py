@@ -172,3 +172,4 @@ def test_normalize_record_rejects_non_mapping():
     import pytest
     with pytest.raises(TypeError, match="record must be a mapping"):
         normalize_record(None)  # type: ignore[arg-type]
+\n\ndef test_build_summary_rejects_non_mapping_records():\n    with pytest.raises(TypeError, match="mapping"):\n        build_summary([None], "2026-09-21 00:00:00")  # type: ignore[list-item]\n\n\ndef test_build_dashboard_payload_rejects_non_mapping_records_before_summary():\n    with pytest.raises(TypeError, match="mapping"):\n        build_dashboard_payload([None], "2026-09-21 00:00:00")  # type: ignore[list-item]\n
