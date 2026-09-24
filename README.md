@@ -1,5 +1,7 @@
 # 📊 Business Report Automation System
 
+![Lines of code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/furqunali/report-automation-system/main/.github/badges/loc.json)
+
 **Turn a folder of messy monthly store reports into one clean master dataset and an interactive KPI dashboard — in a single command.**
 
 🔗 **Live demo:** https://report-automation-dashboard.vercel.app  ·  🤗 **Hugging Face Space:** https://huggingface.co/spaces/FurqanAli12345/intelligent-business-reporting
